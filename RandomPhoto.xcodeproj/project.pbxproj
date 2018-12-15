@@ -12,6 +12,10 @@
 		5379664121C5B5800097389B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5379664021C5B5800097389B /* Assets.xcassets */; };
 		5379664421C5B5800097389B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5379664221C5B5800097389B /* LaunchScreen.storyboard */; };
 		5379664F21C5B5800097389B /* RandomPhotoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379664E21C5B5800097389B /* RandomPhotoTests.swift */; };
+		5379665B21C5BD440097389B /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5379665A21C5BD440097389B /* Nimble.framework */; };
+		5379665D21C5BD4F0097389B /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5379665C21C5BD4F0097389B /* Quick.framework */; };
+		5379665F21C5BD8D0097389B /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5379665C21C5BD4F0097389B /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5379666021C5BD920097389B /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5379665A21C5BD440097389B /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +28,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5379665E21C5BD780097389B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5379666021C5BD920097389B /* Nimble.framework in CopyFiles */,
+				5379665F21C5BD8D0097389B /* Quick.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5379663621C5B57F0097389B /* RandomPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5379663921C5B57F0097389B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +52,8 @@
 		5379664A21C5B5800097389B /* RandomPhotoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RandomPhotoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5379664E21C5B5800097389B /* RandomPhotoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomPhotoTests.swift; sourceTree = "<group>"; };
 		5379665021C5B5800097389B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5379665A21C5BD440097389B /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		5379665C21C5BD4F0097389B /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +68,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5379665D21C5BD4F0097389B /* Quick.framework in Frameworks */,
+				5379665B21C5BD440097389B /* Nimble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +82,7 @@
 				5379663821C5B57F0097389B /* RandomPhoto */,
 				5379664D21C5B5800097389B /* RandomPhotoTests */,
 				5379663721C5B57F0097389B /* Products */,
+				5379665921C5BD430097389B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -93,6 +116,15 @@
 			path = RandomPhotoTests;
 			sourceTree = "<group>";
 		};
+		5379665921C5BD430097389B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5379665C21C5BD4F0097389B /* Quick.framework */,
+				5379665A21C5BD440097389B /* Nimble.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -120,6 +152,7 @@
 				5379664621C5B5800097389B /* Sources */,
 				5379664721C5B5800097389B /* Frameworks */,
 				5379664821C5B5800097389B /* Resources */,
+				5379665E21C5BD780097389B /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -387,6 +420,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z72VG6DPMS;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RandomPhotoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -408,6 +445,10 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z72VG6DPMS;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = RandomPhotoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
