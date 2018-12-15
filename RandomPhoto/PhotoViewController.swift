@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PhotoViewController.swift
 //  RandomPhoto
 //
 //  Created by Daisuke Fujiwara on 12/15/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class PhotoViewController: UIViewController {
     let imageView: UIImageView = UIImageView(frame: .zero)
 
     override func viewDidLoad() {
