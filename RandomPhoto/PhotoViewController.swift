@@ -36,7 +36,7 @@ class PhotoViewController: UIViewController {
             imageView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 10),
-            imageView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor),
+            imageView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }

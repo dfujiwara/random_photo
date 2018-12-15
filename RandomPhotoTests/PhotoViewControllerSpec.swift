@@ -6,8 +6,8 @@
 //  Copyright © 2018 dfujiwara. All rights reserved.
 //
 
-import Quick
 import Nimble
+import Quick
 @testable import RandomPhoto
 
 class PhotoViewControllerSpec: QuickSpec {

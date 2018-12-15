@@ -11,9 +11,10 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-
+    // swiftlint:disable discouraged_optional_collection
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // swiftlint:enable discouraged_optional_collection
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
         let viewController = PhotoViewController()
