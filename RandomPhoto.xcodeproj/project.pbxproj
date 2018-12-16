@@ -17,6 +17,7 @@
 		5379665F21C5BD8D0097389B /* Quick.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5379665C21C5BD4F0097389B /* Quick.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5379666021C5BD920097389B /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5379665A21C5BD440097389B /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5379666221C5BE2B0097389B /* PhotoViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379666121C5BE2B0097389B /* PhotoViewControllerSpec.swift */; };
+		5379666421C5BFFA0097389B /* PhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379666321C5BFFA0097389B /* PhotoLibrary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		5379665A21C5BD440097389B /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
 		5379665C21C5BD4F0097389B /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
 		5379666121C5BE2B0097389B /* PhotoViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewControllerSpec.swift; sourceTree = "<group>"; };
+		5379666321C5BFFA0097389B /* PhotoLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibrary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				5379664021C5B5800097389B /* Assets.xcassets */,
 				5379664221C5B5800097389B /* LaunchScreen.storyboard */,
 				5379664521C5B5800097389B /* Info.plist */,
+				5379666321C5BFFA0097389B /* PhotoLibrary.swift */,
 			);
 			path = RandomPhoto;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5379663C21C5B57F0097389B /* PhotoViewController.swift in Sources */,
+				5379666421C5BFFA0097389B /* PhotoLibrary.swift in Sources */,
 				5379663A21C5B57F0097389B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
