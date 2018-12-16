@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
         let navigationController = UINavigationController()
+        navigationController.navigationBar.tintColor = UIColor.gray
         let router = AppRouter(navigationController: navigationController)
         router.route(.photo, animated: false)
         window?.rootViewController = navigationController
