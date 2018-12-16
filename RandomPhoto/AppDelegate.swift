@@ -19,8 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         let navigationController = UINavigationController()
         let router = AppRouter(navigationController: navigationController)
-        let viewController = PhotoViewController(router: router)
-        navigationController.setViewControllers([viewController], animated: false)
+        router.route(.photo, animated: false)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true

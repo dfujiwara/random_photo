@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 enum Route {
+    case photo
     case albumSelection
 }
 
@@ -20,11 +21,14 @@ class AppRouter {
         self.navigationController = navigationController
     }
 
-    func route(_ route: Route) {
+    func route(_ route: Route, animated: Bool = true) {
         switch route {
+        case .photo:
+            let photoViewController = PhotoViewController(router: self)
+            navigationController?.pushViewController(photoViewController, animated: animated)
         case .albumSelection:
             let viewController = UIViewController()
-            navigationController?.pushViewController(viewController, animated: true)
+            navigationController?.pushViewController(viewController, animated: animated)
         }
     }
 }
