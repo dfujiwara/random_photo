@@ -11,9 +11,12 @@ import UIKit
 class PhotoViewController: UIViewController {
     let imageView: UIImageView = UIImageView(frame: .zero)
     let photoLibrary: PhotoAccess
+    let dispatchQueue: DispatchQueue
 
-    init(photoLibrary: PhotoAccess) {
+    init(photoLibrary: PhotoAccess,
+         dispatchQueue: DispatchQueue = DispatchQueue.main) {
         self.photoLibrary = photoLibrary
+        self.dispatchQueue = dispatchQueue
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -29,17 +32,17 @@ class PhotoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let imageView = self.imageView
         view.addSubview(imageView)
         view.backgroundColor = UIColor.white
         setupImageView()
         setupNavigation()
         setupConstraints()
-        photoLibrary.getRandomPhoto(albumName: "Sherlock") { result in
+        photoLibrary.getRandomPhoto(albumName: "Sherlock") { [weak self] result in
             switch result {
             case let .success(image):
-                imageView.image = image
-
+                self?.dispatchQueue.async {
+                    self?.imageView.image = image
+                }
             case let .error(error):
                 print(error)
             }
@@ -48,6 +51,15 @@ class PhotoViewController: UIViewController {
 
     private func setupNavigation() {
         title = "Hello"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Album",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(albumTapped))
+    }
+
+    @objc
+    private func albumTapped() {
+        print("tapped")
     }
 
     private func setupImageView() {
