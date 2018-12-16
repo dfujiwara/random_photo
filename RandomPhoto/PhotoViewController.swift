@@ -52,17 +52,15 @@ class PhotoViewController: UIViewController {
 
     private func setupImageView() {
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.borderColor = UIColor.black.cgColor
-        imageView.layer.borderWidth = 1
     }
 
     private func setupConstraints() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         let constraints = [
-            imageView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 10),
-            imageView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            imageView.topAnchor.constraint(equalTo: view.topAnchor),
+            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }
