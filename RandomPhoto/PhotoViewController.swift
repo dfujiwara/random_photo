@@ -81,7 +81,7 @@ class PhotoViewController: UIViewController {
 
     private func loadPhoto() {
         activityIndicator.startAnimating()
-        photoLibrary.getRandomPhoto(albumName: "Sherlock") { [weak self] result in
+        photoLibrary.getRandomPhoto() { [weak self] result in
             self?.dispatchQueue.async {
                 self?.activityIndicator.stopAnimating()
                 switch result {

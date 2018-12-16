@@ -21,7 +21,7 @@ enum PhotoAccessError: Error {
 }
 
 protocol PhotoAccess: AnyObject {
-    func getRandomPhoto(albumName: String, completionHandler: @escaping (Result<UIImage>) -> Void)
+    func getRandomPhoto(completionHandler: @escaping (Result<UIImage>) -> Void)
 }
 
 protocol AlbumAccess: AnyObject {
@@ -33,6 +33,7 @@ class PhotoLibrary: PhotoAccess, AlbumAccess {
     let dispatchQueue: DispatchQueue
     let serialQueue: DispatchQueue
     let manager: PHImageManager
+    let albumTitle: String = "Sherlock"
 
     init(dispatchQueue: DispatchQueue = DispatchQueue.global(qos: .userInteractive),
          serialQueue: DispatchQueue = DispatchQueue.main,
@@ -42,10 +43,10 @@ class PhotoLibrary: PhotoAccess, AlbumAccess {
         self.manager = manager
     }
 
-    func getRandomPhoto(albumName: String, completionHandler: @escaping (Result<UIImage>) -> Void) {
+    func getRandomPhoto(completionHandler: @escaping (Result<UIImage>) -> Void) {
         dispatchQueue.async {
             do {
-                let albums = self.retrieveSelectedAlbum(albumName)
+                let albums = self.retrieveSelectedAlbum(self.albumTitle)
                 guard let album = albums.first else {
                     throw PhotoAccessError.noAlbum
                 }
