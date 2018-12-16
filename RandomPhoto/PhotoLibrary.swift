@@ -24,11 +24,22 @@ protocol PhotoAccess: AnyObject {
     func getRandomPhoto(albumName: String, completionHandler: @escaping (Result<UIImage>) -> Void)
 }
 
-class PhotoLibrary: PhotoAccess {
-    let dispatchQueue: DispatchQueue
+protocol AlbumAccess: AnyObject {
+    typealias AlbumTuple = (image: UIImage, title: String)
+    func getAlbums(completionHandler: @escaping (Result<[AlbumTuple]>) -> Void)
+}
 
-    init(dispatchQueue: DispatchQueue) {
+class PhotoLibrary: PhotoAccess, AlbumAccess {
+    let dispatchQueue: DispatchQueue
+    let serialQueue: DispatchQueue
+    let manager: PHImageManager
+
+    init(dispatchQueue: DispatchQueue = DispatchQueue.global(qos: .userInteractive),
+         serialQueue: DispatchQueue = DispatchQueue.main,
+         manager: PHImageManager = PHImageManager.default()) {
         self.dispatchQueue = dispatchQueue
+        self.serialQueue = serialQueue
+        self.manager = manager
     }
 
     func getRandomPhoto(albumName: String, completionHandler: @escaping (Result<UIImage>) -> Void) {
@@ -47,13 +58,15 @@ class PhotoLibrary: PhotoAccess {
     }
 
     private func retrieveSelectedAlbum(_ albumName: String) -> [PHAssetCollection] {
+        let albums = retrieveAlbums()
+        return albums.filter { $0.localizedTitle == albumName }
+    }
+
+    private func retrieveAlbums() -> [PHAssetCollection] {
         let fetchResults = PHAssetCollection.fetchAssetCollections(with: .album,
                                                                    subtype: .any,
                                                                    options: nil)
-        return (0..<fetchResults.count).compactMap { index -> PHAssetCollection? in
-            let fetchResult = fetchResults.object(at: index)
-            return fetchResult.localizedTitle == albumName ? fetchResult : nil
-        }
+        return (0..<fetchResults.count).map { fetchResults.object(at: $0) }
     }
 
     private func retrievePhotoMetadataFromAlbum(_ album: PHAssetCollection) -> [PHAsset] {
@@ -66,7 +79,6 @@ class PhotoLibrary: PhotoAccess {
         guard let randomAsset = assets.randomElement() else {
             throw PhotoAccessError.noPhoto
         }
-        let manager = PHImageManager.default()
         manager.requestImage(for: randomAsset,
                              targetSize: PHImageManagerMaximumSize,
                              contentMode: .aspectFill,
@@ -77,6 +89,36 @@ class PhotoLibrary: PhotoAccess {
                                     completionHandler(Result<UIImage>.error(PhotoAccessError.imageFetchError))
                                 }
 
+        }
+    }
+
+    func getAlbums(completionHandler: @escaping (Result<[AlbumTuple]>) -> Void) {
+        dispatchQueue.async {
+            let albums = self.retrieveAlbums()
+            let albumPhotoAssets = albums.compactMap { album -> (PHAssetCollection, PHAsset)? in
+                guard let asset = self.retrievePhotoMetadataFromAlbum(album).first else {
+                    return nil
+                }
+                return (album, asset)
+            }
+            let dispatchGroup = DispatchGroup()
+            var results: [AlbumTuple] = []
+            albumPhotoAssets.forEach { album, asset in
+                dispatchGroup.enter()
+                self.manager.requestImage(for: asset,
+                                          targetSize: PHImageManagerMaximumSize,
+                                          contentMode: .aspectFill,
+                                          options: nil) { image, _ in
+                                            self.serialQueue.async {
+                                                if let image = image {
+                                                    results.append((image, album.localizedTitle ?? ""))
+                                                }
+                                                dispatchGroup.leave()
+                                            }
+                }
+            }
+            dispatchGroup.wait()
+            completionHandler(Result.success(results))
         }
     }
 }

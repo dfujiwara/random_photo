@@ -16,7 +16,7 @@ class PhotoViewController: UIViewController {
     let dispatchQueue: DispatchQueue
 
     init(router: AppRouter,
-         photoLibrary: PhotoAccess = PhotoLibrary(dispatchQueue: DispatchQueue.global(qos: .userInteractive)),
+         photoLibrary: PhotoAccess = PhotoLibrary(),
          dispatchQueue: DispatchQueue = DispatchQueue.main) {
         self.photoLibrary = photoLibrary
         self.router = router
