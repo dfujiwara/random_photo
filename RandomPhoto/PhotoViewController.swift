@@ -9,7 +9,11 @@
 import UIKit
 
 class PhotoViewController: UIViewController {
-    let imageView: UIImageView = UIImageView(frame: .zero)
+    let imageView: UIImageView = {
+        let view = UIImageView(frame: .zero)
+        view.contentMode = .scaleAspectFill
+        return view
+    }()
     let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .gray)
     let photoLibrary: PhotoAccess
     let router: AppRouter
@@ -34,7 +38,6 @@ class PhotoViewController: UIViewController {
         view.addSubview(imageView)
         view.addSubview(activityIndicator)
         view.backgroundColor = UIColor.white
-        setupImageView()
         setupNavigation()
         setupConstraints()
         activityIndicator.startAnimating()
@@ -64,10 +67,6 @@ class PhotoViewController: UIViewController {
     @objc
     private func albumTapped() {
         router.route(.albumSelection)
-    }
-
-    private func setupImageView() {
-        imageView.contentMode = .scaleAspectFill
     }
 
     private func setupConstraints() {
