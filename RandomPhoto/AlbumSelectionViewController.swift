@@ -42,14 +42,9 @@ class AlbumSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(collectionView)
+        setupNavigation()
+        setupConstraints()
 
-        let constraints = [
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ]
-        NSLayoutConstraint.activate(constraints)
         albumLibrary.getAlbums { [weak self] result in
             self?.dispatchQueue.async {
                 switch result {
@@ -60,6 +55,21 @@ class AlbumSelectionViewController: UIViewController {
                 }
             }
         }
+    }
+
+    private func setupNavigation() {
+        title = "Albums"
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+
+    private func setupConstraints() {
+        let constraints = [
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
     }
 }
 
