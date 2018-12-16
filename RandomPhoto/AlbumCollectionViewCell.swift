@@ -30,7 +30,9 @@ class AlbumCollectionViewCell: UICollectionViewCell {
         view.numberOfLines = 1
         view.textAlignment = .center
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
+        view.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.callout)
+        view.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        view.text = "⭐️"
         return view
     }()
 
@@ -50,7 +52,7 @@ class AlbumCollectionViewCell: UICollectionViewCell {
     func configure(with tuple: (image: UIImage, title: String), selected: Bool) {
         imageView.image = tuple.image
         titleLabel.text = tuple.title
-        selectionLabel.text = selected ? "⭐️" : nil
+        selectionLabel.isHidden = !selected
     }
 
     private func setupConstraints() {
@@ -61,12 +63,13 @@ class AlbumCollectionViewCell: UICollectionViewCell {
             imageView.heightAnchor.constraint(equalToConstant: 100),
             imageView.widthAnchor.constraint(equalToConstant: 100),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5),
-            selectionLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 2),
-            selectionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            selectionLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5),
-            selectionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            selectionLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),
+            selectionLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor),
+            selectionLabel.topAnchor.constraint(equalTo: imageView.topAnchor),
+            selectionLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }
