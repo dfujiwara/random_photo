@@ -30,6 +30,7 @@ class AlbumColletionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
+        contentView.layer.borderColor = UIColor.blue.cgColor
         setupConstraints()
     }
 
@@ -38,9 +39,10 @@ class AlbumColletionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(with tuple: (image: UIImage, title: String)) {
+    func configure(with tuple: (image: UIImage, title: String), selected: Bool) {
         imageView.image = tuple.image
         titleLabel.text = tuple.title
+        contentView.layer.borderWidth = selected ? 1 : 0
     }
 
     private func setupConstraints() {

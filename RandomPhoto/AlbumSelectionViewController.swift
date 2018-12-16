@@ -31,6 +31,7 @@ class AlbumSelectionViewController: UIViewController {
             collectionView.reloadData()
         }
     }
+    private var selectionIndexPath: IndexPath?
     let dispatchQueue: DispatchQueue
 
     init(albumLibrary: AlbumAccess = PhotoLibrary(),
@@ -94,7 +95,14 @@ extension AlbumSelectionViewController: UICollectionViewDelegateFlowLayout, UICo
             preconditionFailure("Should be the right collection view cell type")
         }
         let tuple = albumTuples[indexPath.row]
-        albumCell.configure(with: tuple)
+        albumCell.configure(with: tuple, selected: selectionIndexPath == indexPath)
         return albumCell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let previousSelectionIndexPath = selectionIndexPath
+        selectionIndexPath = indexPath
+        let indexPathsToReload = [previousSelectionIndexPath, indexPath].compactMap { $0 }
+        collectionView.reloadItems(at: indexPathsToReload)
     }
 }
