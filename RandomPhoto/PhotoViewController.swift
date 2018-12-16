@@ -44,6 +44,7 @@ class PhotoViewController: UIViewController {
                 switch result {
                 case let .success(image):
                     self?.imageView.image = image
+
                 case let .error(error):
                     print(error)
                 }
@@ -77,7 +78,7 @@ class PhotoViewController: UIViewController {
             imageView.topAnchor.constraint(equalTo: view.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }

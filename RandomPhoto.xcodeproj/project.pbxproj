@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		530AA8E921C6263500A6D359 /* AlbumSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530AA8E821C6263500A6D359 /* AlbumSelectionViewController.swift */; };
 		534D35A321C612C8005173BC /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534D35A221C612C8005173BC /* AppRouter.swift */; };
 		5379663A21C5B57F0097389B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379663921C5B57F0097389B /* AppDelegate.swift */; };
 		5379663C21C5B57F0097389B /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379663B21C5B57F0097389B /* PhotoViewController.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		530AA8E821C6263500A6D359 /* AlbumSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumSelectionViewController.swift; sourceTree = "<group>"; };
 		534D35A221C612C8005173BC /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		5379663621C5B57F0097389B /* RandomPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5379663921C5B57F0097389B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				5379664521C5B5800097389B /* Info.plist */,
 				5379666321C5BFFA0097389B /* PhotoLibrary.swift */,
 				534D35A221C612C8005173BC /* AppRouter.swift */,
+				530AA8E821C6263500A6D359 /* AlbumSelectionViewController.swift */,
 			);
 			path = RandomPhoto;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 				534D35A321C612C8005173BC /* AppRouter.swift in Sources */,
 				5379663C21C5B57F0097389B /* PhotoViewController.swift in Sources */,
 				5379666421C5BFFA0097389B /* PhotoLibrary.swift in Sources */,
+				530AA8E921C6263500A6D359 /* AlbumSelectionViewController.swift in Sources */,
 				5379663A21C5B57F0097389B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -26,8 +26,9 @@ class AppRouter {
         case .photo:
             let photoViewController = PhotoViewController(router: self)
             navigationController?.pushViewController(photoViewController, animated: animated)
+
         case .albumSelection:
-            let viewController = UIViewController()
+            let viewController = AlbumSelectionViewController()
             navigationController?.pushViewController(viewController, animated: animated)
         }
     }
