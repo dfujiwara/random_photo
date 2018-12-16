@@ -9,17 +9,25 @@
 import UIKit
 
 class AlbumSelectionViewController: UIViewController {
+    static var reuseIdentifier: String {
+        return String(describing: AlbumSelectionViewController.self)
+    }
+
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+        layout.estimatedItemSize = CGSize(width: 80, height: 100)
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = UIColor.white
+        view.bounces = true
+        view.alwaysBounceVertical = true
+        view.register(AlbumColletionViewCell.self,
+                      forCellWithReuseIdentifier: AlbumSelectionViewController.reuseIdentifier)
         return view
     }()
     private let albumLibrary: AlbumAccess
     private var albumTuples: [AlbumAccess.AlbumTuple] = [] {
         didSet {
-            print("set")
             collectionView.reloadData()
         }
     }
@@ -80,6 +88,13 @@ extension AlbumSelectionViewController: UICollectionViewDelegateFlowLayout, UICo
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumSelectionViewController.reuseIdentifier,
+                                                      for: indexPath)
+        guard let albumCell = cell as? AlbumColletionViewCell else {
+            preconditionFailure("Should be the right collection view cell type")
+        }
+        let tuple = albumTuples[indexPath.row]
+        albumCell.configure(with: tuple)
+        return albumCell
     }
 }

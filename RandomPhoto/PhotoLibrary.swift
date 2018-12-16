@@ -79,10 +79,12 @@ class PhotoLibrary: PhotoAccess, AlbumAccess {
         guard let randomAsset = assets.randomElement() else {
             throw PhotoAccessError.noPhoto
         }
+        let requestOptions = PHImageRequestOptions()
+        requestOptions.isSynchronous = true
         manager.requestImage(for: randomAsset,
                              targetSize: PHImageManagerMaximumSize,
                              contentMode: .aspectFill,
-                             options: nil) { image, _ in
+                             options: requestOptions) { image, _ in
                                 if let image = image {
                                     completionHandler(Result.success(image))
                                 } else {
@@ -103,12 +105,15 @@ class PhotoLibrary: PhotoAccess, AlbumAccess {
             }
             let dispatchGroup = DispatchGroup()
             var results: [AlbumTuple] = []
+            let requestOptions = PHImageRequestOptions()
+            requestOptions.isSynchronous = true
+
             albumPhotoAssets.forEach { album, asset in
                 dispatchGroup.enter()
                 self.manager.requestImage(for: asset,
                                           targetSize: PHImageManagerMaximumSize,
                                           contentMode: .aspectFill,
-                                          options: nil) { image, _ in
+                                          options: requestOptions) { image, _ in
                                             self.serialQueue.async {
                                                 if let image = image {
                                                     results.append((image, album.localizedTitle ?? ""))
