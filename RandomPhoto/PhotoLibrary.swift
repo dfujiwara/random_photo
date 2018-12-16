@@ -17,7 +17,7 @@ enum Result<T> {
 enum PhotoAccessError: Error {
     case noAlbum
     case noPhoto
-    case imageFetchError
+    case imageFetchError([AnyHashable: Any])
 }
 
 protocol PhotoAccess: AnyObject {
@@ -85,13 +85,14 @@ class PhotoLibrary: PhotoAccess, AlbumAccess {
         manager.requestImage(for: randomAsset,
                              targetSize: PHImageManagerMaximumSize,
                              contentMode: .aspectFill,
-                             options: requestOptions) { image, _ in
+                             options: requestOptions) { image, errorDict in
                                 if let image = image {
                                     completionHandler(Result.success(image))
                                 } else {
-                                    completionHandler(Result<UIImage>.error(PhotoAccessError.imageFetchError))
+                                    let errorDict: [AnyHashable: Any] = errorDict ?? [:]
+                                    let error = PhotoAccessError.imageFetchError(errorDict)
+                                    completionHandler(Result<UIImage>.error(error))
                                 }
-
         }
     }
 
@@ -114,10 +115,16 @@ class PhotoLibrary: PhotoAccess, AlbumAccess {
                 self.manager.requestImage(for: asset,
                                           targetSize: PHImageManagerMaximumSize,
                                           contentMode: .aspectFill,
-                                          options: requestOptions) { image, _ in
+                                          options: requestOptions) { image, errorDict in
                                             self.serialQueue.async {
+                                                let title = album.localizedTitle ?? ""
                                                 if let image = image {
-                                                    results.append((image, album.localizedTitle ?? ""))
+                                                    results.append((image, title))
+                                                } else {
+                                                    let errorDict: [AnyHashable: Any] = errorDict ?? [:]
+                                                    let error = PhotoAccessError.imageFetchError(errorDict)
+                                                    print(error)
+                                                    results.append((UIImage(), title))
                                                 }
                                                 dispatchGroup.leave()
                                             }
