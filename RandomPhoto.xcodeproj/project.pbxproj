@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		534D35A321C612C8005173BC /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534D35A221C612C8005173BC /* AppRouter.swift */; };
 		5379663A21C5B57F0097389B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379663921C5B57F0097389B /* AppDelegate.swift */; };
 		5379663C21C5B57F0097389B /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379663B21C5B57F0097389B /* PhotoViewController.swift */; };
 		5379664121C5B5800097389B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5379664021C5B5800097389B /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		534D35A221C612C8005173BC /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		5379663621C5B57F0097389B /* RandomPhoto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomPhoto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5379663921C5B57F0097389B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5379663B21C5B57F0097389B /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				5379664221C5B5800097389B /* LaunchScreen.storyboard */,
 				5379664521C5B5800097389B /* Info.plist */,
 				5379666321C5BFFA0097389B /* PhotoLibrary.swift */,
+				534D35A221C612C8005173BC /* AppRouter.swift */,
 			);
 			path = RandomPhoto;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				534D35A321C612C8005173BC /* AppRouter.swift in Sources */,
 				5379663C21C5B57F0097389B /* PhotoViewController.swift in Sources */,
 				5379666421C5BFFA0097389B /* PhotoLibrary.swift in Sources */,
 				5379663A21C5B57F0097389B /* AppDelegate.swift in Sources */,
