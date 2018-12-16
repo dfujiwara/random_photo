@@ -40,28 +40,25 @@ class PhotoViewController: UIViewController {
         view.backgroundColor = UIColor.white
         setupNavigation()
         setupConstraints()
-        activityIndicator.startAnimating()
-        photoLibrary.getRandomPhoto(albumName: "Sherlock") { [weak self] result in
-            self?.dispatchQueue.async {
-                self?.activityIndicator.stopAnimating()
-                switch result {
-                case let .success(image):
-                    self?.imageView.image = image
-
-                case let .error(error):
-                    print(error)
-                }
-            }
-        }
+        loadPhoto()
     }
 
     private func setupNavigation() {
         title = "Photo"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reload",
+                                                           style: .plain,
+                                                           target: self,
+                                                           action: #selector(reloadTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Album",
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(albumTapped))
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    }
+
+    @objc
+    private func reloadTapped() {
+        loadPhoto()
     }
 
     @objc
@@ -80,5 +77,21 @@ class PhotoViewController: UIViewController {
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
+    }
+
+    private func loadPhoto() {
+        activityIndicator.startAnimating()
+        photoLibrary.getRandomPhoto(albumName: "Sherlock") { [weak self] result in
+            self?.dispatchQueue.async {
+                self?.activityIndicator.stopAnimating()
+                switch result {
+                case let .success(image):
+                    self?.imageView.image = image
+
+                case let .error(error):
+                    print(error)
+                }
+            }
+        }
     }
 }
