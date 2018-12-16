@@ -10,6 +10,7 @@ import UIKit
 
 class PhotoViewController: UIViewController {
     let imageView: UIImageView = UIImageView(frame: .zero)
+    let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .gray)
     let photoLibrary: PhotoAccess
     let dispatchQueue: DispatchQueue
 
@@ -33,14 +34,17 @@ class PhotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(imageView)
+        view.addSubview(activityIndicator)
         view.backgroundColor = UIColor.white
         setupImageView()
         setupNavigation()
         setupConstraints()
+        activityIndicator.startAnimating()
         photoLibrary.getRandomPhoto(albumName: "Sherlock") { [weak self] result in
             switch result {
             case let .success(image):
                 self?.dispatchQueue.async {
+                    self?.activityIndicator.stopAnimating()
                     self?.imageView.image = image
                 }
             case let .error(error):
@@ -67,12 +71,14 @@ class PhotoViewController: UIViewController {
     }
 
     private func setupConstraints() {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        [imageView, activityIndicator].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         let constraints = [
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             imageView.topAnchor.constraint(equalTo: view.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
         ]
         NSLayoutConstraint.activate(constraints)
     }
