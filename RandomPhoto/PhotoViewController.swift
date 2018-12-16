@@ -12,18 +12,16 @@ class PhotoViewController: UIViewController {
     let imageView: UIImageView = UIImageView(frame: .zero)
     let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .gray)
     let photoLibrary: PhotoAccess
+    let router: AppRouter
     let dispatchQueue: DispatchQueue
 
-    init(photoLibrary: PhotoAccess,
+    init(router: AppRouter,
+         photoLibrary: PhotoAccess = PhotoLibrary(dispatchQueue: DispatchQueue.global(qos: .userInteractive)),
          dispatchQueue: DispatchQueue = DispatchQueue.main) {
         self.photoLibrary = photoLibrary
+        self.router = router
         self.dispatchQueue = dispatchQueue
         super.init(nibName: nil, bundle: nil)
-    }
-
-    convenience init() {
-        let photoLibrary = PhotoLibrary(dispatchQueue: DispatchQueue.global(qos: .userInteractive))
-        self.init(photoLibrary: photoLibrary)
     }
 
     @available(*, unavailable)
@@ -41,29 +39,30 @@ class PhotoViewController: UIViewController {
         setupConstraints()
         activityIndicator.startAnimating()
         photoLibrary.getRandomPhoto(albumName: "Sherlock") { [weak self] result in
-            switch result {
-            case let .success(image):
-                self?.dispatchQueue.async {
-                    self?.activityIndicator.stopAnimating()
+            self?.dispatchQueue.async {
+                self?.activityIndicator.stopAnimating()
+                switch result {
+                case let .success(image):
                     self?.imageView.image = image
+                case let .error(error):
+                    print(error)
                 }
-            case let .error(error):
-                print(error)
             }
         }
     }
 
     private func setupNavigation() {
-        title = "Hello"
+        title = "Photo"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Album",
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(albumTapped))
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 
     @objc
     private func albumTapped() {
-        print("tapped")
+        router.route(.albumSelection)
     }
 
     private func setupImageView() {

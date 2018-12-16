@@ -17,8 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // swiftlint:enable discouraged_optional_collection
         // Override point for customization after application launch.
         window = UIWindow(frame: UIScreen.main.bounds)
-        let viewController = PhotoViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
+        let navigationController = UINavigationController()
+        let router = AppRouter(navigationController: navigationController)
+        let viewController = PhotoViewController(router: router)
+        navigationController.setViewControllers([viewController], animated: false)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         return true

@@ -14,7 +14,7 @@ enum Route {
 }
 
 class AppRouter {
-    weak var navigationController: UINavigationController?
+    private weak var navigationController: UINavigationController?
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
