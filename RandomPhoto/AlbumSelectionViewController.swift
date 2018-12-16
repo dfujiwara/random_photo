@@ -21,7 +21,7 @@ class AlbumSelectionViewController: UIViewController {
         view.backgroundColor = UIColor.white
         view.bounces = true
         view.alwaysBounceVertical = true
-        view.register(AlbumColletionViewCell.self,
+        view.register(AlbumCollectionViewCell.self,
                       forCellWithReuseIdentifier: AlbumSelectionViewController.reuseIdentifier)
         return view
     }()
@@ -59,6 +59,7 @@ class AlbumSelectionViewController: UIViewController {
                 switch result {
                 case let .success(tuples):
                     self?.albumTuples = tuples
+
                 case let .error(error):
                     print(error)
                 }
@@ -91,7 +92,7 @@ extension AlbumSelectionViewController: UICollectionViewDelegateFlowLayout, UICo
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlbumSelectionViewController.reuseIdentifier,
                                                       for: indexPath)
-        guard let albumCell = cell as? AlbumColletionViewCell else {
+        guard let albumCell = cell as? AlbumCollectionViewCell else {
             preconditionFailure("Should be the right collection view cell type")
         }
         let tuple = albumTuples[indexPath.row]

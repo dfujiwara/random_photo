@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AlbumColletionViewCell: UICollectionViewCell {
+class AlbumCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let view = UIImageView(frame: .zero)
         view.contentMode = .scaleAspectFill
